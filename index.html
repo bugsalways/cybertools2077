@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>赛博工具2077 - Cyber Tools Navigation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            padding-top: 100px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 快速导航栏 */
+        .quick-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+            z-index: 999;
+            padding: 15px 20px;
+        }
+
+        .quick-nav-content {
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .quick-nav-title {
+            color: #333;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-right: 20px;
+            white-space: nowrap;
+        }
+
+        .quick-nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            flex: 1;
+            align-items: center;
+        }
+
+        .quick-nav-item {
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+            color: #333;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            border: 1px solid #d0d0d0;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .quick-nav-item:hover {
+            background: linear-gradient(135deg, #e0e0e0, #d0d0d0);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 联系我按钮 */
+        .contact-btn {
+            background: linear-gradient(135deg, #666, #555);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.95em;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            border: 1px solid #444;
+            white-space: nowrap;
+            margin-left: auto;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #777, #666);
+        }
+
+        /* 返回顶部按钮 */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            border: 2px solid #d0d0d0;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            z-index: 998;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .back-to-top:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            border-color: #999;
+        }
+
+        .back-to-top.show {
+            display: flex;
+        }
+
+        /* 联系我弹窗 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #ffffff, #fff5e6);
+            margin: 5% auto;
+            padding: 0;
+            border: 2px solid #d62828;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.3s ease;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #d62828, #c41e1e);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 13px 13px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+
+        .close {
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            line-height: 1;
+        }
+
+        .close:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 30px;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .modal-body h3 {
+            color: #d62828;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 2px solid #ffe4cc;
+            padding-bottom: 10px;
+        }
+
+        .modal-body h3:first-child {
+            margin-top: 0;
+        }
+
+        .modal-body p {
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        .modal-body ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .modal-body ul li {
+            margin-bottom: 8px;
+        }
+
+        .wechat-info {
+            background: linear-gradient(135deg, #fff5e6, #ffe4cc);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+            border: 2px solid #d62828;
+        }
+
+        .wechat-info strong {
+            font-size: 1.5em;
+            color: #d62828;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .note-box {
+            background: #fff3cd;
+            border-left: 4px solid #d62828;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 40px;
+            background: transparent;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            background: linear-gradient(45deg, #ffffff, #e0e0e0, #ffffff, #f5f5f5, #ffffff);
+            background-size: 400% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
+            margin-bottom: 10px;
+            font-weight: 900;
+            filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.8)) 
+                    drop-shadow(0 0 30px rgba(255, 255, 255, 0.6))
+                    drop-shadow(0 0 50px rgba(255, 255, 255, 0.4));
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { 
+                background-position: 0% center;
+                transform: scale(1);
+            }
+            50% { 
+                background-position: 100% center;
+                transform: scale(1.05);
+            }
+        }
+
+        h1::before {
+            content: '⚡ 赛博工具2077 ⚡';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #ffffff, #e0e0e0, #ffffff, #f5f5f5, #ffffff);
+            background-size: 400% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: blur(25px);
+            opacity: 0.9;
+            z-index: -1;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+
+        .subtitle {
+            color: #ffffff;
+            font-size: 1.3em;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8),
+                         0 0 20px rgba(255, 255, 255, 0.6),
+                         0 0 30px rgba(255, 255, 255, 0.4);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+            50% { 
+                opacity: 0.85;
+                transform: translateY(-3px);
+            }
+        }
+
+        .category {
+            margin-bottom: 50px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 228, 204, 0.8);
+            box-shadow: 0 3px 15px rgba(214, 40, 40, 0.15);
+            backdrop-filter: blur(10px);
+            scroll-margin-top: 80px;
+        }
+
+        .category-title {
+            font-size: 1.8em;
+            color: #8b0000;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ffe4cc;
+            text-shadow: 0 2px 4px rgba(139, 0, 0, 0.3);
+            font-weight: 600;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 15px;
+        }
+
+        .link-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 10px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 228, 204, 0.8);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(214, 40, 40, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .link-card:hover::before {
+            left: 100%;
+        }
+
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(214, 40, 40, 0.3);
+            border-color: #d62828;
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .link-card a {
+            color: #333;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            font-size: 0.95em;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+            letter-spacing: 0.3px;
+            text-align: center;
+        }
+
+        .link-icon {
+            font-size: 2em;
+            margin-bottom: 8px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .link-card:hover .link-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .link-card:hover a {
+            color: #d62828;
+            font-weight: 600;
+        }
+
+        .note {
+            color: #c41e1e;
+            font-size: 0.8em;
+            margin-top: 5px;
+            font-style: italic;
+            font-weight: 400;
+            text-align: center;
+            display: block;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1400px) {
+            .links-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .links-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            h1 {
+                font-size: 2.5em;
+            }
+        }
+
+        /* 优化手机端导航栏 */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 120px; /* 减少顶部空间 */
+            }
+
+            .quick-nav {
+                padding: 8px 12px; /* 缩小内边距 */
+            }
+
+            .quick-nav-content {
+                gap: 6px; /* 缩小间距 */
+            }
+
+            .quick-nav-title {
+                font-size: 1em; /* 缩小标题 */
+                margin-right: 0;
+                margin-bottom: 6px;
+                width: 100%;
+            }
+
+            .quick-nav-links {
+                gap: 6px;
+                width: 100%;
+            }
+
+            .quick-nav-item {
+                font-size: 0.8em; /* 缩小字体 */
+                padding: 6px 10px; /* 缩小按钮 */
+            }
+
+            .contact-btn {
+                font-size: 0.8em;
+                padding: 6px 12px;
+                margin-left: 0;
+                margin-top: 6px;
+                width: 100%;
+            }
+
+            .links-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+                letter-spacing: 2px;
+            }
+
+            .category {
+                padding: 20px 15px;
+                scroll-margin-top: 130px;
+            }
+
+            .category-title {
+                font-size: 1.4em;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+
+            .modal-header {
+                padding: 15px 20px;
+            }
+
+            .modal-header h2 {
+                font-size: 1.4em;
+            }
+
+            .modal-body {
+                padding: 20px 15px;
+            }
+
+            header {
+                padding: 25px 0;
+                margin-bottom: 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-top: 110px; /* 进一步减少空间 */
+                padding: 110px 10px 10px 10px;
+            }
+
+            .quick-nav {
+                padding: 6px 10px;
+            }
+
+            .quick-nav-title {
+                font-size: 0.9em;
+            }
+
+            .quick-nav-item {
+                font-size: 0.75em;
+                padding: 5px 8px;
+            }
+
+            .contact-btn {
+                font-size: 0.75em;
+                padding: 5px 10px;
+            }
+
+            .links-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+            }
+
+            .link-card {
+                padding: 12px 8px;
+            }
+
+            .link-icon {
+                font-size: 1.8em;
+            }
+
+            .link-card a {
+                font-size: 0.85em;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .subtitle {
+                font-size: 0.85em;
+            }
+
+            .category {
+                padding: 15px 10px;
+            }
+
+            .category-title {
+                font-size: 1.2em;
+            }
+
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            color: #8b0000;
+            font-size: 0.9em;
+            border-top: 2px solid rgba(255, 228, 204, 0.8);
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+    </style>
+</head>
+<body>
+    <!-- 快速导航栏 -->
+    <nav class="quick-nav">
+        <div class="quick-nav-content">
+            <div class="quick-nav-title">⚡ 快速导航</div>
+            <div class="quick-nav-links">
+                <a class="quick-nav-item" href="#zhuangji">🖥️ 装机必备</a>
+                <a class="quick-nav-item" href="#ruanjian">🔧 软件工具</a>
+                <a class="quick-nav-item" href="#zaixian">🌐 在线工具</a>
+                <a class="quick-nav-item" href="#yingshi">🎬 在线影视</a>
+                <a class="quick-nav-item" href="#kanqiu">⚽ 在线看球</a>
+                <a class="quick-nav-item" href="#youxi">🎮 游戏资源</a>
+            </div>
+            <button class="contact-btn" id="contactButton">📧 联系我</button>
+        </div>
+    </nav>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" id="backToTop">↑</button>
+
+    <!-- 联系我弹窗 -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📧 联系我们</h2>
+                <span class="close" id="closeButton">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>🌟 关于本站</h3>
+                <p>感谢来访，本站致力于简洁高效的上网导航和搜索入口，安全快捷。</p>
+                <p>如果您喜欢我们的网站，请将本站添加到收藏夹（快捷键<strong>Ctrl+D</strong>），并设为浏览器主页，方便您的下次访问,感谢支持。</p>
+
+                <h3>🔒 本站承诺</h3>
+                <p><strong style="color: #d62828;">绝对不会收集用户的隐私信息</strong></p>
+                <p>区别于部分导航网站，本站链接直接跳转目标，不会对链接处理再后跳转，不会收集用户的隐藏信息，包括但不限于点击记录，访问记录和搜索记录，请放心使用。</p>
+
+                <h3>📞 联系我们</h3>
+                <p>若您在使用本站时遇到了包括但不限于以下问题：</p>
+                <ul>
+                    <li>图标缺失</li>
+                    <li>目标网站无法打开</li>
+                    <li>描述错误</li>
+                    <li>网站违规</li>
+                    <li>收录加急处理</li>
+                    <li>链接删除</li>
+                </ul>
+                <p>请加微信与我联系</p>
+
+                <div class="wechat-info">
+                    <p>💬 微信号</p>
+                    <strong>13021697063</strong>
+                </div>
+
+                <div class="note-box">
+                    <strong>💡 联系说明</strong>
+                    <p style="margin-top: 10px; margin-bottom: 0;">为了您的问题能快速被处理，建议在添加好友时备注<strong>【反馈】【投诉】【推荐】【友链】</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>⚡ 赛博工具2077 ⚡</h1>
+            <div class="subtitle">Cyber Tools Navigation</div>
+        </header>
+
+        <!-- 装机必备 -->
+        <section class="category" id="zhuangji">
+            <h2 class="category-title">🖥️ 装机必备</h2>
+            <div class="links-grid">
+                <div class="link-card" onclick="window.open('https://topic.expreview.com/CPU/', '_blank')">
+                    <a href="https://topic.expreview.com/CPU/" target="_blank" onclick="event.preventDefault()">
+                        <span class="link-icon">🔢</span>
+                        CPU天梯图
+                    </a>
+                </div>
+                <div class="link-card" onclick="window.open('https://topic.expreview.com/GPU/', '_blank')">
+                    <a href="https://topic.expreview.com/GPU/" target="_blank" onclick="event.preventDefault()">
+                        <span class="link-icon">🎮</span>
+                        显卡天梯图
+                    </a>
+                </div>
+                <div class="link-card" onclick="window.open('https://screen.bmcx.com/#welcome', '_blank')">
+                    <a href="https://screen.bmcx.com/#welcome" target="_blank" onclick="event.preventDefault()">
+                        <span class="link-icon">📱</span>
+                        屏幕检测
+                    </a>
+                </div>
+                <div class="link-card" onclick="window.open('https://testufo.com/', '_blank')">
+                    <a href="https://testufo.com/" target="_blank" onclick="event.preventDefault()">
+                        <span class="link-icon">🎯</span>
+                        刷新率测试
+                    </a>
+                </div>
+                <div class="link-card" onclick="window.open('https://www.zfrontier.com/lab/keyboardTester', '_blank')">
+                    <a href="https://www.zfrontier.com/lab/keyboardTester" target="_blank" onclick="event.preventDefault()">
+                        <span class="link-icon">⌨️</span>
+                        键盘检测
+                    </a>
+                </div>
+                <div class="link-card" onclick="window.open('https://testmouse.com/zh', '_blank')">
+                    <a href="https://testmouse.com/zh" target="_blank" onclick="event.preventDefault()">
+                        <span class="link-icon">🖱️</span>
+                        鼠标检测
+                    </a>
+                </div>
+                <div class="link-card" onclick="window.open('https://www.9slab.com/gamepad/home', '_blank')">
+                    <a href="https://www.9slab.com/gamepad/home" target="_blank" onclick="event.preventDefault()">
+                        <span class="link-icon">🎮</span>
+                        手柄测试
+                    </a>
+                </div>
+                <div class="link-card" onclick="window.open('https://test.ustc.edu.cn/', '_blank')">
+                    <a href="https://test.ustc.edu.cn/" target="_blank" onclick="event.preventDefault()">
+                        <span class="link-icon">🌐</span>
+                        测网速
+                    </a>
+                </div>
+                <div class="link-card" onclick="window.open('https://haowallpaper.com/', '_blank')">
+                    <a href="https://haowallpaper.com/" target="_blank" onclick="event.preventDefault()">
+                        <span class="link-icon">🖼️</span>
+                        高清壁纸
+                    </a>
+                </div>
+                <div class="link-card" onclick="window.open('https://www.tubatool.com/download/', '_blank')">
+                    <a href="https://www.tubatool.com/download/" target="_blank" onclick="event.preventDefault()">
+                        <span class="link-icon">🧰</span>
+                        图吧工具箱
+                    </a>
+                </div>
+                <div class="link-card" onclick="window.open('https://gamepp.com/', '_blank')">
+                    <a href="https://gamepp.com/" target="_blank" onclick="event.preventDefault()">
+                        <span class="link-icon">📊</span>
+                        游戏加加<div class="note">测帧数</div>
+                    </a>
+                </div>
+                <div class="link-card" onclick="window.open('https://geekuninstaller.com/', '_blank')">
+                    <a href="https://geekuninstaller.com/" target="_blank" onclick="event.preventDefault()">
+                        <span class="link-icon">🗑️</span>
+                        Geek卸载
+                    </a>
+                </div>
+                <div class="link-card" onclick="window.open('https://www.laomaotao.net/', '_blank')">
+                    <a href="https://www.laomaotao.net/" target="_blank" onclick="event.preventDefault()">
+                        <span class="link-icon">💿</span>
+                        重装系统
+                    </a>
+                </div>
+                <div class="link-card" onclick="window.open('https://pan.quark.cn/s/c7ec6f854670?pwd=t3WB', '_blank')">
+                    <a href="https://pan.quark.cn/s/c7ec6f854670?pwd=t3WB" target="_blank" onclick="event.preventDefault()">
+                        <span class="link-icon">🔑</span>
+                        系统激活<div class="note">提取码:t3WB</div>
+                    </a>
+                </div>
+                <div class="link-card" onclick="window.open('https://msdn.itellyou.cn/', '_blank')">
+                    <a href="https://msdn.itellyou.cn/" target="_blank" onclick="event.preventDefault()">
+                        <span class="link-icon">💾</span>
+                        系统镜像
+                    </a>
+                </div>
+                <div class="link-card" onclick="window.open('https://pan.quark.cn/s/9467dd8631f6?pwd=tT2P', '_blank')">
+                    <a href="https://pan.quark.cn/s/9467dd8631f6?pwd=tT2P" target="_blank" onclick="event.preventDefault()">
+                        <span class="link-icon">🔧</span>
+                        DX修复工具<div class="note">提取码:tT2P</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+       <!-- 软件工具 -->
+       <section class="category" id="ruanjian">
+           <h2 class="category-title">🔧 软件工具</h2>
+           <div class="links-grid">
+               <div class="link-card" onclick="window.open('https://potplayer.tv/?lang=zh_CN', '_blank')">
+                   <a href="https://potplayer.tv/?lang=zh_CN" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">▶️</span>
+                       PotPlayer播放器
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://www.7-zip.org/', '_blank')">
+                   <a href="https://www.7-zip.org/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">📦</span>
+                       7-zip解压
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://pan.quark.cn/s/b3af7106d335?pwd=mwd4', '_blank')">
+                   <a href="https://pan.quark.cn/s/b3af7106d335?pwd=mwd4" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">✂️</span>
+                       剪映国际版<div class="note">提取码:mwd4</div>
+                   </a>
+               </div>
+           </div>
+       </section>
+
+       <!-- 在线工具 -->
+       <section class="category" id="zaixian">
+           <h2 class="category-title">🌐 在线工具</h2>
+           <div class="links-grid">
+               <div class="link-card" onclick="window.open('https://www.xiaobaitool.net?r=qzzw1c', '_blank')">
+                   <a href="https://www.xiaobaitool.net?r=qzzw1c" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🛠️</span>
+                       小白工具
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://www.alltoall.net/', '_blank')">
+                   <a href="https://www.alltoall.net/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🔄</span>
+                       格式转换
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://www.1ppt.com/', '_blank')">
+                   <a href="https://www.1ppt.com/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">📊</span>
+                       PPT模板
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://zh.wikihow.com/', '_blank')">
+                   <a href="https://zh.wikihow.com/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">📖</span>
+                       万事指南
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://md.phodal.com/', '_blank')">
+                   <a href="https://md.phodal.com/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">📝</span>
+                       Markdown编辑器
+                   </a>
+               </div>
+           </div>
+       </section>
+
+       <!-- 在线影视 -->
+       <section class="category" id="yingshi">
+           <h2 class="category-title">🎬 在线影视</h2>
+           <div class="links-grid">
+               <div class="link-card" onclick="window.open('https://www.libvio.app/', '_blank')">
+                   <a href="https://www.libvio.app/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🎥</span>
+                       Libvio
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://dl.kkys1.com/', '_blank')">
+                   <a href="https://dl.kkys1.com/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🎬</span>
+                       可可影视
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('http://age.tv/', '_blank')">
+                   <a href="http://age.tv/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🎞️</span>
+                       AGE动漫
+                   </a>
+               </div>
+           </div>
+       </section>
+
+       <!-- 在线看球 -->
+       <section class="category" id="kanqiu">
+           <h2 class="category-title">⚽ 在线看球</h2>
+           <div class="links-grid">
+               <div class="link-card" onclick="window.open('https://360baty.com/', '_blank')">
+                   <a href="https://360baty.com/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">⚽</span>
+                       360吧
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://www.360ba.live/', '_blank')">
+                   <a href="https://www.360ba.live/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🏀</span>
+                       360吧备用
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://bszb386.com/', '_blank')">
+                   <a href="https://bszb386.com/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">📺</span>
+                       比赛直播
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://down.bszb386.com/?agent=B&app=gzjAPP', '_blank')">
+                   <a href="https://down.bszb386.com/?agent=B&app=gzjAPP" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">📲</span>
+                       APP下载1
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://down.bszb387.com/?agent=B&app=gzjAPP', '_blank')">
+                   <a href="https://down.bszb387.com/?agent=B&app=gzjAPP" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">📲</span>
+                       APP下载2
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://down.bszb388.com/?agent=B&app=gzj', '_blank')">
+                   <a href="https://down.bszb388.com/?agent=B&app=gzj" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">📲</span>
+                       APP下载3
+                   </a>
+               </div>
+           </div>
+       </section>
+
+       <!-- 游戏资源 -->
+       <section class="category" id="youxi">
+           <h2 class="category-title">🎮 游戏资源</h2>
+           <div class="links-grid">
+               <div class="link-card" onclick="window.open('https://flingtrainer.com/', '_blank')">
+                   <a href="https://flingtrainer.com/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🎯</span>
+                       风灵月影修改器
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://www.nexusmods.com/', '_blank')">
+                   <a href="https://www.nexusmods.com/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🔧</span>
+                       N网Mod下载
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://pan.quark.cn/s/d12dbff78fbb?pwd=54PD', '_blank')">
+                   <a href="https://pan.quark.cn/s/d12dbff78fbb?pwd=54PD" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🚗</span>
+                       GTA5<div class="note">提取码:54PD</div>
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://pan.quark.cn/s/18533c6e7fb4?pwd=GrPq', '_blank')">
+                   <a href="https://pan.quark.cn/s/18533c6e7fb4?pwd=GrPq" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🤖</span>
+                       赛博朋克2077<div class="note">提取码:GrPq</div>
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://pan.quark.cn/s/6cb1e7452ad0?pwd=kQE8', '_blank')">
+                   <a href="https://pan.quark.cn/s/6cb1e7452ad0?pwd=kQE8" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">⚔️</span>
+                       只狼<div class="note">提取码:kQE8</div>
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://pan.quark.cn/s/40fab307b62e?pwd=NqRm', '_blank')">
+                   <a href="https://pan.quark.cn/s/40fab307b62e?pwd=NqRm" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🧟</span>
+                       最后生还者1<div class="note">提取码:NqRm</div>
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://pan.quark.cn/s/12cd4b4bd6c0?pwd=Vpxr', '_blank')">
+                   <a href="https://pan.quark.cn/s/12cd4b4bd6c0?pwd=Vpxr" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🧟‍♀️</span>
+                       最后生还者2<div class="note">提取码:Vpxr</div>
+                   </a>
+               </div>
+           </div>
+       </section>
+
+       <footer>
+           <p>⚡ 赛博工具2077 - 您的数字工具导航站 ⚡</p>
+           <p style="margin-top: 10px; font-size: 0.85em; color: #666;">Powered by Cyber Technology</p>
+       </footer>
+   </div>
+
+   <script>
+       // 获取元素
+       const contactButton = document.getElementById('contactButton');
+       const contactModal = document.getElementById('contactModal');
+       const closeButton = document.getElementById('closeButton');
+       const backToTop = document.getElementById('backToTop');
+
+       // 打开弹窗
+       contactButton.addEventListener('click', function() {
+           contactModal.style.display = 'block';
+           document.body.style.overflow = 'hidden';
+       });
+
+       // 关闭弹窗 - 点击X按钮
+       closeButton.addEventListener('click', function() {
+           contactModal.style.display = 'none';
+           document.body.style.overflow = 'auto';
+       });
+
+       // 关闭弹窗 - 点击弹窗外部
+       contactModal.addEventListener('click', function(event) {
+           if (event.target === contactModal) {
+               contactModal.style.display = 'none';
+               document.body.style.overflow = 'auto';
+           }
+       });
+
+       // ESC键关闭弹窗
+       document.addEventListener('keydown', function(event) {
+           if (event.key === 'Escape' && contactModal.style.display === 'block') {
+               contactModal.style.display = 'none';
+               document.body.style.overflow = 'auto';
+           }
+       });
+
+       // 返回顶部按钮显示/隐藏
+       window.addEventListener('scroll', function() {
+           if (window.pageYOffset > 300) {
+               backToTop.classList.add('show');
+           } else {
+               backToTop.classList.remove('show');
+           }
+       });
+
+       // 返回顶部功能
+       backToTop.addEventListener('click', function() {
+           window.scrollTo({
+               top: 0,
+               behavior: 'smooth'
+           });
+       });
+
+       // 平滑滚动到锚点
+       document.querySelectorAll('.quick-nav-item').forEach(anchor => {
+           anchor.addEventListener('click', function (e) {
+               e.preventDefault();
+               const target = document.querySelector(this.getAttribute('href'));
+               if (target) {
+                   target.scrollIntoView({
+                       behavior: 'smooth',
+                       block: 'start'
+                   });
+               }
+           });
+       });
+   </script>
+</body>
+</html>
+
