@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-
-<link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="/manifest.json">
     
     <meta name="baidu-site-verification" content="codeva-akHZ4aSJMO" />
     <meta name="sogou_site_verification" content="rhZJI0RM2H" />
     
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-KZPQJ54BR9"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-KZPQJ54BR9');
-</script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KZPQJ54BR9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KZPQJ54BR9');
+    </script>
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
- <!-- ========== SEO优化开始 ========== -->
+    <!-- ========== SEO优化开始 ========== -->
     
     <!-- 网站标题 - 包含核心关键词 -->
     <title>赛博工具2077 - 最全AI工具导航 | 装机必备软件 | 在线工具大全 | CyberTools</title>
@@ -80,7 +78,6 @@
     
     <!-- ========== SEO优化结束 ========== -->
     
-    <title>赛博工具2077 - Cyber Tools Navigation</title>
     <style>
         * {
             margin: 0;
@@ -113,6 +110,91 @@
             z-index: -1;
         }
 
+        /* ========== 广告位样式 ========== */
+        .ad-container {
+            position: fixed;
+            top: 120px;
+            width: 200px;
+            z-index: 900;
+        }
+
+        .ad-container.left {
+            left: 20px;
+        }
+
+        .ad-container.right {
+            right: 20px;
+        }
+
+        .ad-box {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid rgba(214, 40, 40, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .ad-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            border-color: #d62828;
+        }
+
+        .ad-label {
+            font-size: 0.75em;
+            color: #999;
+            text-align: center;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        .ad-content {
+            text-align: center;
+            min-height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f5f5f5, #e8e8e8);
+            border-radius: 5px;
+            color: #666;
+            font-size: 0.9em;
+            padding: 10px;
+        }
+
+        .ad-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .ad-close {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 20px;
+            height: 20px;
+            background: rgba(214, 40, 40, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 12px;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .ad-close:hover {
+            background: #d62828;
+            transform: rotate(90deg);
+        }
+
         .container {
             max-width: 1600px;
             margin: 0 auto;
@@ -120,7 +202,6 @@
             z-index: 1;
         }
 
-        /* 快速导航栏 */
         .quick-nav {
             position: fixed;
             top: 0;
@@ -178,7 +259,6 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
         }
 
-        /* 联系我按钮 */
         .contact-btn {
             background: linear-gradient(135deg, #666, #555);
             color: white;
@@ -200,7 +280,6 @@
             background: linear-gradient(135deg, #777, #666);
         }
 
-        /* 返回顶部按钮 */
         .back-to-top {
             position: fixed;
             bottom: 30px;
@@ -233,7 +312,6 @@
             display: flex;
         }
 
-        /* 联系我弹窗 */
         .modal {
             display: none;
             position: fixed;
@@ -544,7 +622,13 @@
             display: block;
         }
 
-        /* 响应式设计 */
+        /* 响应式设计 - 隐藏广告位 */
+        @media (max-width: 1600px) {
+            .ad-container {
+                display: none;
+            }
+        }
+
         @media (max-width: 1400px) {
             .links-grid {
                 grid-template-columns: repeat(6, 1fr);
@@ -560,37 +644,30 @@
             }
         }
 
-        /* 优化手机端导航栏 */
         @media (max-width: 768px) {
             body {
-                padding-top: 120px; /* 减少顶部空间 */
+                padding-top: 120px;
             }
-
             .quick-nav {
-                padding: 8px 12px; /* 缩小内边距 */
+                padding: 8px 12px;
             }
-
             .quick-nav-content {
-                gap: 6px; /* 缩小间距 */
+                gap: 6px;
             }
-
             .quick-nav-title {
-                font-size: 1em; /* 缩小标题 */
+                font-size: 1em;
                 margin-right: 0;
                 margin-bottom: 6px;
                 width: 100%;
             }
-
             .quick-nav-links {
                 gap: 6px;
                 width: 100%;
             }
-
             .quick-nav-item {
-                font-size: 0.8em; /* 缩小字体 */
-                padding: 6px 10px; /* 缩小按钮 */
+                font-size: 0.8em;
+                padding: 6px 10px;
             }
-
             .contact-btn {
                 font-size: 0.8em;
                 padding: 6px 12px;
@@ -598,47 +675,37 @@
                 margin-top: 6px;
                 width: 100%;
             }
-
             .links-grid {
                 grid-template-columns: repeat(3, 1fr);
                 gap: 10px;
             }
-
             h1 {
                 font-size: 1.8em;
             }
-
             .subtitle {
                 font-size: 1em;
                 letter-spacing: 2px;
             }
-
             .category {
                 padding: 20px 15px;
                 scroll-margin-top: 130px;
             }
-
             .category-title {
                 font-size: 1.4em;
             }
-
             .modal-content {
                 width: 95%;
                 margin: 10% auto;
             }
-
             .modal-header {
                 padding: 15px 20px;
             }
-
             .modal-header h2 {
                 font-size: 1.4em;
             }
-
             .modal-body {
                 padding: 20px 15px;
             }
-
             header {
                 padding: 25px 0;
                 margin-bottom: 25px;
@@ -647,61 +714,48 @@
 
         @media (max-width: 480px) {
             body {
-                padding-top: 110px; /* 进一步减少空间 */
+                padding-top: 110px;
                 padding: 110px 10px 10px 10px;
             }
-
             .quick-nav {
                 padding: 6px 10px;
             }
-
             .quick-nav-title {
                 font-size: 0.9em;
             }
-
             .quick-nav-item {
                 font-size: 0.75em;
                 padding: 5px 8px;
             }
-
             .contact-btn {
                 font-size: 0.75em;
                 padding: 5px 10px;
             }
-
             .links-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 8px;
             }
-
             .link-card {
                 padding: 12px 8px;
             }
-
             .link-icon {
                 font-size: 1.8em;
             }
-
             .link-card a {
                 font-size: 0.85em;
             }
-
             h1 {
                 font-size: 1.5em;
             }
-
             .subtitle {
                 font-size: 0.85em;
             }
-
             .category {
                 padding: 15px 10px;
             }
-
             .category-title {
                 font-size: 1.2em;
             }
-
             .back-to-top {
                 width: 45px;
                 height: 45px;
@@ -725,7 +779,30 @@
     </style>
 </head>
 <body>
-    <!-- 快速导航栏 -->
+    <!-- 左侧广告位 -->
+    <div class="ad-container left" id="leftAd">
+        <div class="ad-box">
+            <button class="ad-close" onclick="document.getElementById('leftAd').style.display='none'">×</button>
+            <div class="ad-label">恭喜</div>
+            <div class="ad-content">
+                <!-- 在这里放置您的广告代码 -->
+                广告位招租
+            </div>
+        </div>
+    </div>
+
+    <!-- 右侧广告位 -->
+    <div class="ad-container right" id="rightAd">
+        <div class="ad-box">
+            <button class="ad-close" onclick="document.getElementById('rightAd').style.display='none'">×</button>
+            <div class="ad-label">发财</div>
+            <div class="ad-content">
+                <!-- 在这里放置您的广告代码 -->
+                广告位招租
+            </div>
+        </div>
+    </div>
+
     <nav class="quick-nav">
         <div class="quick-nav-content">
             <div class="quick-nav-title">⚡ 快速导航</div>
@@ -741,10 +818,8 @@
         </div>
     </nav>
 
-    <!-- 返回顶部按钮 -->
     <button class="back-to-top" id="backToTop">↑</button>
 
-    <!-- 联系我弹窗 -->
     <div id="contactModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -753,148 +828,146 @@
             </div>
             <div class="modal-body">
                 <h3>🌟 关于本站</h3>
-                <p>感谢来访，本站致力于简洁高效的上网导航和搜索入口，安全快捷。</p>
-                <p>如果您喜欢我们的网站，请将本站添加到收藏夹（快捷键<strong>Ctrl+D</strong>），并设为浏览器主页，方便您的下次访问,感谢支持。</p>
+                <p>感谢来访,本站致力于简洁高效的上网导航和搜索入口,安全快捷。</p>
+                <p>如果您喜欢我们的网站,请将本站添加到收藏夹(快捷键<strong>Ctrl+D</strong>),并设为浏览器主页,方便您的下次访问,感谢支持。</p>
 
                 <h3>🔒 本站承诺</h3>
                 <p><strong style="color: #d62828;">绝对不会收集用户的隐私信息</strong></p>
-                <p>区别于部分导航网站，本站链接直接跳转目标，不会对链接处理再后跳转，不会收集用户的隐藏信息，包括但不限于点击记录，访问记录和搜索记录，请放心使用。</p>
+                <p>区别于部分导航网站,本站链接直接跳转目标,不会对链接处理再后跳转,不会收集用户的隐藏信息,包括但不限于点击记录,访问记录和搜索记录,请放心使用。</p>
 
                 <h3>📞 联系我们</h3>
-                <p>若您在使用本站时遇到了包括但不限于以下问题：</p>
+                <p>若您在使用本站时遇到了包括但不限于以下问题:</p>
                 <ul>
                     <li>图标缺失</li>
-                    <li>目标网站无法打开</li>
-                    <li>描述错误</li>
-                    <li>网站违规</li>
-                    <li>收录加急处理</li>
-                    <li>链接删除</li>
-                </ul>
-                <p>请加微信与我联系</p>
+                   <li>目标网站无法打开</li>
+                   <li>描述错误</li>
+                   <li>网站违规</li>
+                   <li>收录加急处理</li>
+                   <li>链接删除</li>
+               </ul>
+               <p>请加微信与我联系</p>
 
-                <div class="wechat-info">
-                    <p>💬 微信号</p>
-                    <strong>13021697063</strong>
-                </div>
+               <div class="wechat-info">
+                   <p>💬 微信号</p>
+                   <strong>13021697063</strong>
+               </div>
 
-                <div class="note-box">
-                    <strong>💡 联系说明</strong>
-                    <p style="margin-top: 10px; margin-bottom: 0;">为了您的问题能快速被处理，建议在添加好友时备注<strong>【反馈】【投诉】【推荐】【友链】</strong></p>
-                </div>
-            </div>
-        </div>
-    </div>
+               <div class="note-box">
+                   <strong>💡 联系说明</strong>
+                   <p style="margin-top: 10px; margin-bottom: 0;">为了您的问题能快速被处理,建议在添加好友时备注<strong>【反馈】【投诉】【推荐】【友链】</strong></p>
+               </div>
+           </div>
+       </div>
+   </div>
 
-    <div class="container">
-        <header>
-            <h1>⚡ 赛博工具2077 ⚡</h1>
-            <div class="subtitle">Cyber Tools Navigation</div>
-        </header>
+   <div class="container">
+       <header>
+           <h1>⚡ 赛博工具2077 ⚡</h1>
+           <div class="subtitle">Cyber Tools Navigation</div>
+       </header>
 
-        <!-- 装机必备 -->
-        <section class="category" id="zhuangji">
-            <h2 class="category-title">🖥️ 装机必备</h2>
-            <div class="links-grid">
-                <div class="link-card" onclick="window.open('https://topic.expreview.com/CPU/', '_blank')">
-                    <a href="https://topic.expreview.com/CPU/" target="_blank" onclick="event.preventDefault()">
-                        <span class="link-icon">🔢</span>
-                        CPU天梯图
-                    </a>
-                </div>
-                <div class="link-card" onclick="window.open('https://topic.expreview.com/GPU/', '_blank')">
-                    <a href="https://topic.expreview.com/GPU/" target="_blank" onclick="event.preventDefault()">
-                        <span class="link-icon">🎮</span>
-                        显卡天梯图
-                    </a>
-                </div>
-                <div class="link-card" onclick="window.open('https://screen.bmcx.com/#welcome', '_blank')">
-                    <a href="https://screen.bmcx.com/#welcome" target="_blank" onclick="event.preventDefault()">
-                        <span class="link-icon">📱</span>
-                        屏幕检测
-                    </a>
-                </div>
-                <div class="link-card" onclick="window.open('https://testufo.com/', '_blank')">
-                    <a href="https://testufo.com/" target="_blank" onclick="event.preventDefault()">
-                        <span class="link-icon">🎯</span>
-                        刷新率测试
-                    </a>
-                </div>
-                <div class="link-card" onclick="window.open('https://www.zfrontier.com/lab/keyboardTester', '_blank')">
-                    <a href="https://www.zfrontier.com/lab/keyboardTester" target="_blank" onclick="event.preventDefault()">
-                        <span class="link-icon">⌨️</span>
-                        键盘检测
-                    </a>
-                </div>
-                <div class="link-card" onclick="window.open('https://testmouse.com/zh', '_blank')">
-                    <a href="https://testmouse.com/zh" target="_blank" onclick="event.preventDefault()">
-                        <span class="link-icon">🖱️</span>
-                        鼠标检测
-                    </a>
-                </div>
-                <div class="link-card" onclick="window.open('https://www.9slab.com/gamepad/home', '_blank')">
-                    <a href="https://www.9slab.com/gamepad/home" target="_blank" onclick="event.preventDefault()">
-                        <span class="link-icon">🎮</span>
-                        手柄测试
-                    </a>
-                </div>
-                <div class="link-card" onclick="window.open('https://test.ustc.edu.cn/', '_blank')">
-                    <a href="https://test.ustc.edu.cn/" target="_blank" onclick="event.preventDefault()">
-                        <span class="link-icon">🌐</span>
-                        测网速
-                    </a>
-                </div>
-                <div class="link-card" onclick="window.open('https://haowallpaper.com/', '_blank')">
-                    <a href="https://haowallpaper.com/" target="_blank" onclick="event.preventDefault()">
-                        <span class="link-icon">🖼️</span>
-                        高清壁纸
-                    </a>
-                </div>
-                <div class="link-card" onclick="window.open('https://www.tubatool.com/download/', '_blank')">
-                    <a href="https://www.tubatool.com/download/" target="_blank" onclick="event.preventDefault()">
-                        <span class="link-icon">🧰</span>
-                        图吧工具箱
-                    </a>
-                </div>
-                <div class="link-card" onclick="window.open('https://gamepp.com/', '_blank')">
-                    <a href="https://gamepp.com/" target="_blank" onclick="event.preventDefault()">
-                        <span class="link-icon">📊</span>
-                        游戏加加<div class="note">测帧数</div>
-                    </a>
-                </div>
-                <div class="link-card" onclick="window.open('https://geekuninstaller.com/', '_blank')">
-                    <a href="https://geekuninstaller.com/" target="_blank" onclick="event.preventDefault()">
-                        <span class="link-icon">🗑️</span>
-                        Geek卸载
-                    </a>
-                </div>
-                <div class="link-card" onclick="window.open('https://www.laomaotao.net/', '_blank')">
-                    <a href="https://www.laomaotao.net/" target="_blank" onclick="event.preventDefault()">
-                        <span class="link-icon">💿</span>
-                        重装系统
-                    </a>
-                </div>
-                <div class="link-card" onclick="window.open('https://pan.quark.cn/s/c7ec6f854670?pwd=t3WB', '_blank')">
-                    <a href="https://pan.quark.cn/s/c7ec6f854670?pwd=t3WB" target="_blank" onclick="event.preventDefault()">
-                        <span class="link-icon">🔑</span>
-                        系统激活<div class="note">提取码:t3WB</div>
-                    </a>
-                </div>
-                <div class="link-card" onclick="window.open('https://msdn.itellyou.cn/', '_blank')">
-                    <a href="https://msdn.itellyou.cn/" target="_blank" onclick="event.preventDefault()">
-                        <span class="link-icon">💾</span>
-                        系统镜像
-                    </a>
-                </div>
-                <div class="link-card" onclick="window.open('https://pan.quark.cn/s/9467dd8631f6?pwd=tT2P', '_blank')">
-                    <a href="https://pan.quark.cn/s/9467dd8631f6?pwd=tT2P" target="_blank" onclick="event.preventDefault()">
-                        <span class="link-icon">🔧</span>
-                        DX修复工具<div class="note">提取码:tT2P</div>
-                    </a>
-                </div>
-            </div>
-        </section>
+       <section class="category" id="zhuangji">
+           <h2 class="category-title">🖥️ 装机必备</h2>
+           <div class="links-grid">
+               <div class="link-card" onclick="window.open('https://topic.expreview.com/CPU/', '_blank')">
+                   <a href="https://topic.expreview.com/CPU/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🔢</span>
+                       CPU天梯图
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://topic.expreview.com/GPU/', '_blank')">
+                   <a href="https://topic.expreview.com/GPU/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🎮</span>
+                       显卡天梯图
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://screen.bmcx.com/#welcome', '_blank')">
+                   <a href="https://screen.bmcx.com/#welcome" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">📱</span>
+                       屏幕检测
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://testufo.com/', '_blank')">
+                   <a href="https://testufo.com/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🎯</span>
+                       刷新率测试
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://www.zfrontier.com/lab/keyboardTester', '_blank')">
+                   <a href="https://www.zfrontier.com/lab/keyboardTester" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">⌨️</span>
+                       键盘检测
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://testmouse.com/zh', '_blank')">
+                   <a href="https://testmouse.com/zh" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🖱️</span>
+                       鼠标检测
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://www.9slab.com/gamepad/home', '_blank')">
+                   <a href="https://www.9slab.com/gamepad/home" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🎮</span>
+                       手柄测试
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://test.ustc.edu.cn/', '_blank')">
+                   <a href="https://test.ustc.edu.cn/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🌐</span>
+                       测网速
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://haowallpaper.com/', '_blank')">
+                   <a href="https://haowallpaper.com/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🖼️</span>
+                       高清壁纸
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://www.tubatool.com/download/', '_blank')">
+                   <a href="https://www.tubatool.com/download/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🧰</span>
+                       图吧工具箱
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://gamepp.com/', '_blank')">
+                   <a href="https://gamepp.com/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">📊</span>
+                       游戏加加<div class="note">测帧数</div>
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://geekuninstaller.com/', '_blank')">
+                   <a href="https://geekuninstaller.com/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🗑️</span>
+                       Geek卸载
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://www.laomaotao.net/', '_blank')">
+                   <a href="https://www.laomaotao.net/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">💿</span>
+                       重装系统
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://pan.quark.cn/s/c7ec6f854670?pwd=t3WB', '_blank')">
+                   <a href="https://pan.quark.cn/s/c7ec6f854670?pwd=t3WB" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🔑</span>
+                       系统激活<div class="note">提取码:t3WB</div>
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://msdn.itellyou.cn/', '_blank')">
+                   <a href="https://msdn.itellyou.cn/" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">💾</span>
+                       系统镜像
+                   </a>
+               </div>
+               <div class="link-card" onclick="window.open('https://pan.quark.cn/s/9467dd8631f6?pwd=tT2P', '_blank')">
+                   <a href="https://pan.quark.cn/s/9467dd8631f6?pwd=tT2P" target="_blank" onclick="event.preventDefault()">
+                       <span class="link-icon">🔧</span>
+                       DX修复工具<div class="note">提取码:tT2P</div>
+                   </a>
+               </div>
+           </div>
+       </section>
 
-       <!-- 软件工具 -->
        <section class="category" id="ruanjian">
            <h2 class="category-title">🔧 软件工具</h2>
            <div class="links-grid">
@@ -919,7 +992,6 @@
            </div>
        </section>
 
-       <!-- 在线工具 -->
        <section class="category" id="zaixian">
            <h2 class="category-title">🌐 在线工具</h2>
            <div class="links-grid">
@@ -956,7 +1028,6 @@
            </div>
        </section>
 
-       <!-- 在线影视 -->
        <section class="category" id="yingshi">
            <h2 class="category-title">🎬 在线影视</h2>
            <div class="links-grid">
@@ -981,7 +1052,6 @@
            </div>
        </section>
 
-       <!-- 在线看球 -->
        <section class="category" id="kanqiu">
            <h2 class="category-title">⚽ 在线看球</h2>
            <div class="links-grid">
@@ -1024,7 +1094,6 @@
            </div>
        </section>
 
-       <!-- 游戏资源 -->
        <section class="category" id="youxi">
            <h2 class="category-title">🎮 游戏资源</h2>
            <div class="links-grid">
@@ -1080,25 +1149,21 @@
    </div>
 
    <script>
-       // 获取元素
        const contactButton = document.getElementById('contactButton');
        const contactModal = document.getElementById('contactModal');
        const closeButton = document.getElementById('closeButton');
        const backToTop = document.getElementById('backToTop');
 
-       // 打开弹窗
        contactButton.addEventListener('click', function() {
            contactModal.style.display = 'block';
            document.body.style.overflow = 'hidden';
        });
 
-       // 关闭弹窗 - 点击X按钮
        closeButton.addEventListener('click', function() {
            contactModal.style.display = 'none';
            document.body.style.overflow = 'auto';
        });
 
-       // 关闭弹窗 - 点击弹窗外部
        contactModal.addEventListener('click', function(event) {
            if (event.target === contactModal) {
                contactModal.style.display = 'none';
@@ -1106,7 +1171,6 @@
            }
        });
 
-       // ESC键关闭弹窗
        document.addEventListener('keydown', function(event) {
            if (event.key === 'Escape' && contactModal.style.display === 'block') {
                contactModal.style.display = 'none';
@@ -1114,7 +1178,6 @@
            }
        });
 
-       // 返回顶部按钮显示/隐藏
        window.addEventListener('scroll', function() {
            if (window.pageYOffset > 300) {
                backToTop.classList.add('show');
@@ -1123,7 +1186,6 @@
            }
        });
 
-       // 返回顶部功能
        backToTop.addEventListener('click', function() {
            window.scrollTo({
                top: 0,
@@ -1131,7 +1193,6 @@
            });
        });
 
-       // 平滑滚动到锚点
        document.querySelectorAll('.quick-nav-item').forEach(anchor => {
            anchor.addEventListener('click', function (e) {
                e.preventDefault();
@@ -1144,50 +1205,42 @@
                }
            });
        });
+   </script>
 
-    <!-- ========== 结构化数据(Schema.org) - 添加到 </body> 之前 ========== -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "赛博工具2077",
-      "alternateName": "CyberTools 2077",
-      "url": "https://cybertools.fans",
-      "description": "一站式工具导航网站,提供装机必备、在线工具、影视资源、游戏下载等服务",
-      "keywords": "工具导航,装机必备,在线工具,系统重装,格式转换,免费软件",
-      "author": {
-        "@type": "Organization",
-        "name": "CyberTools"
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "CyberTools 2077",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://cybertools.fans/logo.png"
-        }
-      },
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://cybertools.fans/?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      },
-      "inLanguage": "zh-CN",
-      "copyrightYear": "2024",
-      "copyrightHolder": {
-        "@type": "Organization",
-        "name": "CyberTools 2077"
-      }
-    }
-       
+   <script type="application/ld+json">
+   {
+     "@context": "https://schema.org",
+     "@type": "WebSite",
+     "name": "赛博工具2077",
+     "alternateName": "CyberTools 2077",
+     "url": "https://cybertools.fans",
+     "description": "一站式工具导航网站,提供装机必备、在线工具、影视资源、游戏下载等服务",
+     "keywords": "工具导航,装机必备,在线工具,系统重装,格式转换,免费软件",
+     "author": {
+       "@type": "Organization",
+       "name": "CyberTools"
+     },
+     "publisher": {
+       "@type": "Organization",
+       "name": "CyberTools 2077",
+       "logo": {
+         "@type": "ImageObject",
+         "url": "https://cybertools.fans/logo.png"
+       }
+     },
+     "potentialAction": {
+       "@type": "SearchAction",
+       "target": "https://cybertools.fans/?q={search_term_string}",
+       "query-input": "required name=search_term_string"
+     },
+     "inLanguage": "zh-CN",
+     "copyrightYear": "2025",
+     "copyrightHolder": {
+       "@type": "Organization",
+       "name": "CyberTools 2077"
+     }
+   }
    </script>
 </body>
 </html>
-
-
-
-
-
-
-
 
