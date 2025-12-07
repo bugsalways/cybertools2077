@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    
+    <!-- 首页 - 最高优先级 -->
+    <url>
+        <loc>https://cybertools.fans/</loc>
+        <lastmod>2024-12-07</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- 装机必备分类 -->
+    <url>
+        <loc>https://cybertools.fans/#装机必备</loc>
+        <lastmod>2024-12-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- 软件工具分类 -->
+    <url>
+        <loc>https://cybertools.fans/#软件工具</loc>
+        <lastmod>2024-12-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- 在线工具分类 -->
+    <url>
+        <loc>https://cybertools.fans/#在线工具</loc>
+        <lastmod>2024-12-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- 在线影视分类 -->
+    <url>
+        <loc>https://cybertools.fans/#在线影视</loc>
+        <lastmod>2024-12-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- 在线看球分类 -->
+    <url>
+        <loc>https://cybertools.fans/#在线看球</loc>
+        <lastmod>2024-12-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- 游戏资源分类 -->
+    <url>
+        <loc>https://cybertools.fans/#游戏资源</loc>
+        <lastmod>2024-12-07</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+</urlset>
