@@ -1,0 +1,38 @@
+# 赛博工具2077 - Robots.txt
+# 网站: https://cybertools.fans
+
+# 允许所有搜索引擎爬取
+User-agent: *
+Allow: /
+
+# 禁止爬取的目录(如果有)
+# Disallow: /private/
+# Disallow: /admin/
+
+# 网站地图位置
+Sitemap: https://cybertools.fans/sitemap.xml
+
+# 针对主流搜索引擎的特殊配置
+
+# Google
+User-agent: Googlebot
+Allow: /
+
+# 百度
+User-agent: Baiduspider
+Allow: /
+
+# 必应
+User-agent: Bingbot
+Allow: /
+
+# 搜狗
+User-agent: Sogou web spider
+Allow: /
+
+# 360搜索
+User-agent: 360Spider
+Allow: /
+
+# 抓取频率限制(可选)
+Crawl-delay: 1
